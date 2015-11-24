@@ -253,4 +253,9 @@ footer{
 		width: auto;
 		max-width: auto;
 	}
+
+	.noscroll div{
+		transform: translateY(0px);
+		opacity: 1;
+	}	
 }
