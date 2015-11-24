@@ -1,6 +1,7 @@
 body{
 	position: relative;
 	font-family: 'Ubuntu';
+	overflow-x: hidden;
 }
 
 a{
@@ -92,6 +93,7 @@ footer{
 	position: fixed;
 	z-index: -1;
 	top: 0;
+	
 }
 
 #content .container-fluid .container{
