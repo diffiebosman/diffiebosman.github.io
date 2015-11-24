@@ -20,15 +20,21 @@ $(document).ready(function(){
 	    return false;
 	});	
 
+	if( $('body,html').scrollTop() >= $('#about').offset().top - offsetHeight){
+		$(".noscroll").removeClass('noscroll').addClass('onscroll');
+	}
+
 	// Change header when scrolling past About Us
-	$('.navbar').on('activate.bs.scrollspy', function () {
+	$(window).on('scroll', function () {
   		if( $('body,html').scrollTop() >= $('#about').offset().top - offsetHeight){
   			$(".navbar-default").css('opacity', '1');
+  			$(".noscroll").removeClass('noscroll').addClass('onscroll');
   		}
   		else{
   			if($(window).width() > 768)
   				$(".navbar-default").css('opacity', '0.9');
   		}
-	})
+	});
 });
 	
+
