@@ -20,10 +20,6 @@ $(document).ready(function(){
 	    return false;
 	});	
 
-	if( $('body,html').scrollTop() >= $('#about').offset().top - offsetHeight){
-		$(".noscroll").removeClass('noscroll').addClass('onscroll');
-	}
-
 	// Change header when scrolling past About Us
 	$(window).on('scroll', function () {
   		if( $('body,html').scrollTop() >= $('#about').offset().top - offsetHeight){

@@ -8,6 +8,10 @@ a{
 	outline: none !important;
 }
 
+a:hover{
+	text-transform: none;
+}
+
 h1, h2, h3, navbar-nav a{
 	font-family: 'Ubuntu';
 }
@@ -127,7 +131,39 @@ footer{
 	margin-top: 0px;
 }
 
+.certificates{
+	margin-top: 40px;
+}
 
+.certificates a{
+	width: 100%;
+}
+
+.certificate{
+	background-color: #064D63;
+
+	border: 4px solid #064D63;
+	border-radius: 50%;
+	width: 300px;
+	height: 300px;
+	color: #FFF;
+	vertical-align: middle;
+	padding-top: 70px;
+	font-size: 28px;
+	display: inline-block;
+	transition: all 0.5s;
+	margin-bottom: 20px;
+}
+
+.certificate.BEE{
+	padding-top: 90px;
+}
+
+.certificate:hover{
+	background-color: #FFF;
+	color: #064D63;
+	transition: all 0.5s;
+}
 
 #contact{
 	position: relative;
@@ -259,5 +295,27 @@ footer{
 	.noscroll div{
 		transform: translateY(0px);
 		opacity: 1;
+	}	
+
+	.certificate{
+		height: 80vw;
+		width: 80vw;
+		font-size: 32px;
+
+		padding-top: 30vw !important;
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+}
+
+@media screen and (max-width: 550px){
+	.certificate{
+		font-size: 26px;
+	}	
+}
+
+@media screen and (max-width: 400px){
+	.certificate{
+		font-size: 16px;
 	}	
 }
