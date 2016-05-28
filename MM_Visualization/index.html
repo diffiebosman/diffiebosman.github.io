@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Viz Biz</title>
+	<script type="text/javascript" src="cytoscape.min.js"></script>
+	<style type="text/css">
+	#cy {
+ 		width: 1000px;
+ 		height: 600px;
+ 		display: block;
+ 		border: 1px solid black;
+	}
+
+	</style>
+</head>
+<body>
+	<div id="cy"></div>
+
+	<script type="text/javascript">
+		var colWidth = 200;
+		var rowHeight = 75;
+
+		var cy = cytoscape({
+
+		  container: document.getElementById('cy'), // container to render in
+
+		  style: [ // the stylesheet for the graph
+		    {
+		      selector: 'node',
+		      style: {
+		        'background-color': '#443633',
+		        'label': 'data(id)',
+		        'text-valign': 'center',
+				'text-halign': 'right'
+		      }
+		    },
+
+		    {
+		      selector: 'edge',
+		      style: {
+		        'width': 3,
+		        'line-color': '#443633',
+		        'target-arrow-color': '#443633',
+		        'target-arrow-shape': 'triangle'
+
+		      }
+		    }
+		  ],
+		  
+		  zoomingEnabled: false,
+		  boxSelectionEnabled: false,
+		  autoungrabify: true,
+		  boxSelectionEnabled: false,
+		  autounselectify: true,
+		  userPanningEnabled: false
+		});
+
+		cy.on('mouseover', 'node', function (event) {
+			var node = event.cyTarget;
+			node.animate({
+                css: {'background-color': '#6C9A30'}
+            }, {duration: 100});
+
+            cy.edges("[source='"+node.id()+"']").animate({
+                css: {'line-color': '#6C9A30', "target-arrow-color": "#6C9A30"}
+            }, {duration: 100});
+		});
+
+		cy.on('mouseout', 'node', function (event) {
+			var node = event.cyTarget;
+			node.animate({
+                css: {'background-color': '#443633'}
+            }, {duration: 100});
+
+            cy.edges("[source='"+node.id()+"']").animate({
+                css: {'line-color': '#443633', "target-arrow-color": "#443633"}
+            }, {duration: 100});
+		});		
+
+		var modules = [
+			{code: "110", year: 1},
+			{code: "120", year: 1},
+
+			{code: "210", year: 2},
+			{code: "211", year: 2},
+			{code: "220", year: 2},
+
+			{code: "300", year: 3},
+			{code: "310", year: 3},
+			{code: "320", year: 3},
+
+			{code: "761", year: 4},
+			{code: "772", year: 4},
+			{code: "773", year: 4},
+			{code: "777", year: 4},
+			{code: "771", year: 4},
+			{code: "779", year: 4}
+		];
+
+		var connections = [
+			{source: "110", target: "120"},
+			{source: "110", target: "210"},
+			{source: "110", target: "220"},
+			{source: "120", target: "211"},
+			{source: "120", target: "220"},
+			{source: "120", target: "300"},
+
+			{source: "210", target: "220"},
+			{source: "211", target: "300"},
+			{source: "211", target: "320"},
+			{source: "211", target: "777"},
+			{source: "220", target: "772"},
+
+			{source: "310", target: "300"},
+			{source: "310", target: "779"},
+			{source: "310", target: "761"},
+			{source: "320", target: "771"}
+		];
+
+		var module;
+		var colWidthMod = colWidth;
+		var num = 0, year = 0;
+		for(var i = 0, l = modules.length; i < l; i++){
+			module = modules[i];
+			num = year == module.year ? num + 1 : 1;
+			year = module.year;
+
+			if(module.year == 4){colWidthMod = colWidth + 50};
+
+			cy.add({
+				group: "nodes",
+				position: {x: 100 + (colWidthMod * (module.year - 1)), y: 100 + (rowHeight * (num - 1))},
+				data: {id: module.code}
+			});
+		}
+
+		var connection;
+		for(var i = 0, l = connections.length; i < l; i++){
+			connection = connections[i];
+			cy.add({
+				group: "edges",
+				data: {id: connection.source+connection.target, source: connection.source, target: connection.target}
+			});
+		}
+	</script>
+</body>
+</html>
