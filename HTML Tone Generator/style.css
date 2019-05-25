@@ -1,0 +1,152 @@
+:root {
+	--green: #56BF7B;
+	--lightGreen: #DCF2DE;
+	--lightOrange: #F2C49B;
+	--darkOrange: #F2937E;
+	--red: #F26D6D;
+}
+
+h1{
+    font-family: 'Montserrat', sans-serif;
+    margin: 50px;
+    text-align: center;
+}
+
+div#UI_icons{
+	text-align: right;
+	padding-left: 10px;
+}
+
+div#UI_icons > div:nth-child(1){
+	height: 376px;
+}
+
+div#UI_icons div.UI{
+	background-size: contain;
+	height: 35px;
+	width: 35px;
+}
+
+div#UI_icons div#UI_amp{
+	background-image: url("amp_icon.png");
+}
+
+div#UI_icons div#UI_freq{
+	background-image: url("freq_icon.png");
+}
+
+div.tones{
+	border: 5px solid var(--lightGreen);
+	border-radius: 10px;
+	/*background-color: var(--lightGreen);*/
+	padding: 20px;
+	text-align: center;
+	position: relative;
+}
+
+div.tones input{
+	height: 300px;
+	z-index: 1;
+}
+
+div.tones div.amp-indicator{
+	position: relative;
+	width: 22px;
+	height: 22px;
+	border-radius: 25px;
+	background-color: var(--darkOrange);
+	opacity: 0.5;
+	margin: 0 auto;
+	top: -25px;
+	z-index: -1;
+}
+
+div.tones span{
+	position: relative;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 12px;
+	color: var(--darkOrange);
+	top: -40px;
+}
+
+span{
+	margin-bottom: 40px;
+}
+
+
+
+
+input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 100%; /* Specific width is required for Firefox. */
+  background: transparent; /* Otherwise white in Chrome */
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+  outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+
+input[type=range]::-ms-track {
+  width: 100%;
+  cursor: pointer;
+
+  /* Hides the slider so custom styles can be added */
+  background: transparent; 
+  border-color: transparent;
+  color: transparent;
+}
+
+
+input[type=range]::-moz-range-thumb {
+  border: 1px solid var(--darkOrange);
+  background: var(--darkOrange);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+
+/* Special styling for WebKit/Blink */
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid var(--darkOrange);
+  background: var(--darkOrange);
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+}
+
+/* All the same stuff for IE */
+input[type=range]::-ms-thumb {
+	-webkit-appearance: none;
+  border: 1px solid var(--darkOrange);
+  background: var(--darkOrange);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+
+
+input[type=range]::-moz-range-track {
+  width: 5px;
+  height: 100%;
+  cursor: pointer;
+  background: var(--lightOrange);
+  border-radius: 5px;
+}
+
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 5px;
+  height: 100%;
+  cursor: pointer;
+  background: var(--lightOrange);
+  border-radius: 5px;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: var(--lightOrange);
+}
