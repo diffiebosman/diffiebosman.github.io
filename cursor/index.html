@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+	</style>
+</head>
+<body>
+	
+	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="width:100%; height:100%; position:absolute; top:0; left:0; z-index:-1;" id="stage">
+	  	<ellipse id="ball" rx="20" ry="20" cy="580" cx="525"></ellipse>
+	</svg>	
+	
+	<script type="text/javascript">
+		var stage = document.getElementById("stage");
+	    var stageHeight = 600;
+	    var stageWidth = 980;
+	    var ballSize = 20;
+	    var ballWidth = ballSize;
+	    var ballHeight = ballSize;
+	    var ball = document.getElementById("ball");
+	    ball.setAttribute("rx", ballWidth);
+	    ball.setAttribute("ry", ballHeight);
+
+		var mousePos = [0,0];
+	    var ballPos = [0,0];
+
+	    var momentum = [0,0];
+	    
+		var speedLimit = 25;
+		var drag = [0,0]
+
+		// lower number = more drag
+		// 1 = no effect
+		// > 1 = chaos
+		var dragModifier = 0.2;
+
+		var lastMouse = [0,0];
+		var mouseSpeed = [0,0];
+		
+	    (function() {
+		    document.onmousemove = handleMouseMove;
+		    function handleMouseMove(event) {
+		        var eventDoc, doc, body;
+
+		        event = event || window.event; // IE-ism
+
+		        if (event.pageX == null && event.clientX != null) {
+		            eventDoc = (event.target && event.target.ownerDocument) || document;
+		            doc = eventDoc.documentElement;
+		            body = eventDoc.body;
+
+		            event.pageX = event.clientX +
+		              (doc && doc.scrollLeft || body && body.scrollLeft || 0) -
+		              (doc && doc.clientLeft || body && body.clientLeft || 0);
+		            event.pageY = event.clientY +
+		              (doc && doc.scrollTop  || body && body.scrollTop  || 0) -
+		              (doc && doc.clientTop  || body && body.clientTop  || 0 );
+		        }
+
+		        mouseX = event.pageX;
+		        mouseY = event.pageY;
+		        mousePos = [event.pageX, event.pageY];
+		    }
+		})();
+
+	    function tick(){	
+	    	//mouseSpeedX = mouseX - lastMouse[0];
+	        //mouseSpeedY = mouseY - lastMouse[1];
+	        mouseSpeed = [mousePos[0] - lastMouse[0], mousePos[1] - lastMouse[1]]
+
+	        // if(mouseSpeedY > 0) dragModifier *= mouseSpeedY;
+
+	        //dragX = (mouseX - ballPos[0]) * dragModifier;
+	        //dragY = (mouseY - ballPos[1]) * dragModifier;
+	        drag = [mousePos[0] - ballPos[0], mousePos[1] - ballPos[1]];
+	        drag = drag.map(e => e * dragModifier);
+
+	        lastMouse[0] = mouseX;
+	        lastMouse[1] = mouseY;
+
+
+	    	if(ballPos[0] < mousePos[0] && momentum[0] <= speedLimit) momentum[0] += dragModifier;
+	    	if(ballPos[1] < mousePos[1] && momentum[1] <= speedLimit) momentum[1] += dragModifier;
+
+	    	if(ballPos[0] > mousePos[0] && momentum[0] >= speedLimit * -1) momentum[0] -= dragModifier;
+	    	if(ballPos[1] > mousePos[1] && momentum[1] >= speedLimit * -1) momentum[1] -= dragModifier;
+
+	    	ballPos[0] += momentum[0] + drag[0];	
+	    	ballPos[1] += momentum[1] + drag[1];
+    		
+    		ball.setAttribute('cx', ballPos[0]);
+    		ball.setAttribute('cy', ballPos[1]);
+	    }
+
+	    var intervalID = window.setInterval(tick, 10);
+    
+	</script>
+</body>
+</html>
